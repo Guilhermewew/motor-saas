@@ -8,7 +8,8 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Libera todos os sites para acessar o motor
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
