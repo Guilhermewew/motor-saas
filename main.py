@@ -64,3 +64,12 @@ def criar_pagamento(pedido: NovoPedido):
     
     # Entregamos o link final (init_point) de volta
     return {"link_de_pagamento": resposta_mp["response"]["init_point"]}
+
+class NovaLoja(BaseModel):
+    nome: str
+
+@app.post("/lojas")
+def criar_loja(loja: NovaLoja):
+    # Manda o nome da loja lá para o banco de dados Supabase
+    resposta = supabase.table("lojas").insert({"nome": loja.nome}).execute()
+    return {"mensagem": "Loja criada com sucesso!", "dados": resposta.data}
