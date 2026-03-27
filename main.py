@@ -1,10 +1,20 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client
 from pydantic import BaseModel
 import mercadopago
 
 # 1. Criamos o nosso garçom
 app = FastAPI()
+
+# NOVO: Damos o "crachá" para a Vitrine (Vercel) poder conversar com o Motor sem ser barrada
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 2. Mostramos a ele onde fica a cozinha 
 URL_SUPABASE = "https://sdffwrpacvtjncuqtrft.supabase.co"
